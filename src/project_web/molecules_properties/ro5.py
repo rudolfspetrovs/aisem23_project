@@ -26,9 +26,12 @@ def get_data(raw_data: list) -> dict:
                 - max_value (float): maximum value
     """
     ro_five_values = [int(d["molecule_properties"]["num_ro5_violations"]) \
-                        for d in raw_data \
-                        if d["molecule_properties"]["num_ro5_violations"]]
-    return dict(component="Number of ro5 violations",
+                    for d in raw_data \
+                    if d["molecule_properties"]["num_ro5_violations"]]
+    
+    if len(raw_data) == 0: return {}
+    else:
+        return dict(component="Number of ro5 violations",
                 data=ro_five_values,
                 mean=np.mean(ro_five_values),
                 std=np.std(ro_five_values),
