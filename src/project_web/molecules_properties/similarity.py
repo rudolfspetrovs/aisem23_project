@@ -25,8 +25,33 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
-    
+    if not raw_data:
+        return {}
+
+    similarity_values = []
+    for data in raw_data:
+        molecule_properties = data.get("molecule_properties")
+        if molecule_properties:
+            similarity = molecule_properties.get("similarity")
+            if similarity is not None:
+                similarity_values.append(similarity)
+    if len(similarity_values) == 0:
+        return {}
+    mean = np.mean(similarity_values)
+    std = np.std(similarity_values, ddof=1) if len(similarity_values) > 1 else 0
+    min_value = np.min(similarity_values)
+    max_value = np.max(similarity_values)
+
+    return {
+        "component": "similarity",
+        "data": similarity_values,
+        "mean": mean,
+        "std": std,
+        "min_value": min_value,
+        "max_value": max_value,
+    }
+
+
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
        Method drawing histogram of similarities.
