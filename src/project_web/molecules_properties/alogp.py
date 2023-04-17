@@ -25,8 +25,32 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
-    
+    if not raw_data:
+        return {}
+
+    alogp_values = []
+    for data in raw_data:
+        molecule_properties = data.get("molecule_properties")
+        if molecule_properties:
+            alogp = molecule_properties.get("alogp")
+            if alogp is not None:
+                alogp_values.append(alogp)
+
+    mean = np.mean(alogp_values)
+    std = np.std(alogp_values, ddof=1) if len(alogp_values) > 1 else 0
+    min_value = np.min(alogp_values)
+    max_value = np.max(alogp_values)
+
+    return {
+        "component": "aLogP",
+        "data": alogp_values,
+        "mean": mean,
+        "std": std,
+        "min_value": min_value,
+        "max_value": max_value,
+    }
+
+
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
        Method drawing a histogram of aLogP.
