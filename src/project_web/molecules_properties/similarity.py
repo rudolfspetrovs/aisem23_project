@@ -30,11 +30,9 @@ def get_data(raw_data: list) -> dict:
 
     similarity_values = []
     for data in raw_data:
-        molecule_properties = data.get("molecule_properties")
-        if molecule_properties:
-            similarity = molecule_properties.get("similarity")
-            if similarity is not None:
-                similarity_values.append(similarity)
+        similarity = data.get("similarity")
+        if similarity is not None:
+            similarity_values.append(similarity)
     if len(similarity_values) == 0:
         return {}
     mean = np.mean(similarity_values)
