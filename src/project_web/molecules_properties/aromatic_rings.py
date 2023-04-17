@@ -24,7 +24,16 @@ def get_data(raw_data: list) -> dict:
                 - std (float): standard deviation
                 - min_value (float): minimum value
                 - max_value (float): maximum value
+    
     """
+    number_aromatic_rings = [int(d["molecule_properties"]["aromatic_rings"]) for d in raw_data if d["molecule_properties"]["aromatic_rings"]]
+    return dict(component="Number of aromatic rings",
+                data=number_aromatic_rings,
+                mean=np.mean(number_aromatic_rings),
+                std=np.std(number_aromatic_rings),
+                max_value=np.max(number_aromatic_rings),
+                min_value=np.min(number_aromatic_rings)
+                )
     return {}
     
 def draw_component(data_array: list) -> dcc.Graph:
