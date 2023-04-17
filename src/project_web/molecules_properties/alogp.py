@@ -36,6 +36,10 @@ def get_data(raw_data: list) -> dict:
             if alogp is not None:
                 alogp_values.append(alogp)
 
+    # If list is empty, some of the NumPy functions will fail
+    if len(alogp_values) == 0:
+        return {}
+
     mean = np.mean(alogp_values)
     std = np.std(alogp_values, ddof=1) if len(alogp_values) > 1 else 0
     min_value = np.min(alogp_values)

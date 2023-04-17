@@ -33,3 +33,7 @@ def test_get_data(sample_raw_data):
     }
 
     assert get_data(sample_raw_data) == expected_output
+
+
+def test_get_data_alogp_empty(sample_raw_data):
+    assert get_data([sample_raw_data[1]]) == {}
