@@ -25,8 +25,17 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
-    
+    ro_five_values = [int(d["molecule_properties"]["num_ro5_violations"] \
+                        for d in raw_data \
+                        if d["molecule_properties"]["num_ro5_violations"])]
+    return dict(component="Number of heavy atoms",
+                data=ro_five_values,
+                mean=np.mean(ro_five_values),
+                std=np.std(ro_five_values),
+                max_value=np.max(ro_five_values),
+                min_value=np.min(ro_five_values),
+                )
+
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
        Method drawing a histogram for number of `rule of five` violations.
