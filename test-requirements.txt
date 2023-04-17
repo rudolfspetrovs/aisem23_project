@@ -1,0 +1,18 @@
+# Collecting pytest
+#   Using cached pytest-7.3.1-py3-none-any.whl (320 kB)
+# Collecting exceptiongroup>=1.0.0rc8
+#   Downloading exceptiongroup-1.1.1-py3-none-any.whl (14 kB)
+# Requirement already satisfied: packaging in ./venv/lib/python3.9/site-packages (from pytest) (23.1)
+# Collecting tomli>=1.0.0
+#   Using cached tomli-2.0.1-py3-none-any.whl (12 kB)
+# Collecting pluggy<2.0,>=0.12
+#   Using cached pluggy-1.0.0-py2.py3-none-any.whl (13 kB)
+# Collecting iniconfig
+#   Downloading iniconfig-2.0.0-py3-none-any.whl (5.9 kB)
+# Installing collected packages: tomli, pluggy, iniconfig, exceptiongroup, pytest
+# Successfully installed exceptiongroup-1.1.1 iniconfig-2.0.0 pluggy-1.0.0 pytest-7.3.1 tomli-2.0.
+pytest>=7.3.1
+exceptiongroup>=1.1.1
+iniconfig>=2.0.0
+pluggy>=1.0.0
+tomli>=2.0.1
