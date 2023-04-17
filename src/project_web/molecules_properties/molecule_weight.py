@@ -5,6 +5,18 @@ import plotly.graph_objs as go
 
 
 def get_data(raw_data: list) -> dict:
+    mol_weight = [int(d["molecule_properties"]["full_mwt"]) for d in raw_data if d["molecule_properties"]["full_mwt"]]
+    mol_weight=[i for i in mol_weight if i is not None]
+    output = dict(component="Molecular weight of the molecule",
+                data=mol_weight,
+                mean=np.mean(mol_weight),
+                std=np.std(mol_weight),
+                max_value=np.max(mol_weight),
+                min_value=np.min(mol_weight)
+                )
+    if len(raw_data) == 0:
+        output = ''
+    return output
     """Implement the function that extracts molecule weight per molecule from raw ChEMBL data
        Computes mean, median and standard deviation 
        
@@ -25,7 +37,6 @@ def get_data(raw_data: list) -> dict:
                 - min_value (float): minimum value
                 - max_value (float): maximum value
     """
-    return {}
     
 def draw_component(data_array: list) -> dcc.Graph:
     """[OPTIONAL]
